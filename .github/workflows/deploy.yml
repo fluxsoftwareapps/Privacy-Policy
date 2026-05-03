@@ -2,7 +2,7 @@ name: Deploy Privacy Policy
 
 on:
   push:
-    branches: ["main"] # Ana branch ismin farklıysa (master gibi) burayı değiştir
+    branches: ["main"]
 
 permissions:
   contents: read
@@ -13,7 +13,7 @@ jobs:
   deploy:
     environment:
       name: github-pages
-      url: ${{ steps:deployment.outputs.page_url }}
+      url: ${{ steps.deployment.outputs.page_url }} # Buradaki iki nokta, nokta ile değiştirildi
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -25,7 +25,6 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Eğer dosyaların bir klasör içindeyse '.' yerine klasör adını yaz
           path: '.'
 
       - name: Deploy to GitHub Pages
